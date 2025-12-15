@@ -1,0 +1,144 @@
+#Quick Recap:-
+- Products 
+- Classroom environment.
+  Login to VMs - student/student ; root/redhat 
+  Login to OCP cluster - admin/redhatocp ; developer/developer ; kubeadmin/kubeadmin-password.
+  
+  API URL - https://api.ocp4.example.com:6443
+  Web Console - https://console-openshift-console.apps.ocp4.example.com
+  
+  CLI login to OCP cluster:-
+  $ oc login -u admin -p redhatocp https://api.ocp4.example.com:6443 
+  
+  OCP cluster - 5 nodes (3 master,2 worker nodes);
+  
+  workstation.lab.example.com to login to OCP cluster via oc.
+  
+  oc used Rest API to communicated with OCP cluster.
+  
+  master node running k8s/ocp services/applications.
+  worker nodes for end user services/application.
+  
+  
+################
+Unit-1 Red Hat OpenShift Virtualization
+- OpenShift Virtualization
+- Underlying Kubernetes Architecture 
+- Deploying the OpenShift Virtualization Operator
+
+=====================
+What is Red Hat OpenShift Virtualization?
+
+
+===============************************************
+Deploying all below application on single Physical Machine:-
+- app01=Java based
+- app02=Php based 
+- app03=Python based 
+
+  Own libs/bins + Custom Shared libs 
+  
+  Requirement - from php team to update the PHP package.
+  While applying patch to PHP for upgrade the custom shared libs also updated, due to that might be java application crashed.
+
+Solution-1- Deploy each application on different Physical machine.
+
+
+Solution-2- Virtualization.
+Single PM + Hypervisor = Multiple Virtual Machine 
+
+Hypervisor - It's a OS, which allow to create VMs.  
+- ESXi, KVM, HyperV, Zen Virtualization etc.
+FYI- huge effort required to isolate VMs (Effort by kenrel & Compute resources).
+
+
+Solution-3-Containerization
+PM/VM - Multiple Containers running.
+
+Application required - RunTime env (Libs/bins) + Kenrel  [This Conatiner RunTime is isolated].
+Libs/bins & required RunTime provided via images. 
+===============************************************
+
+Red Hat OpenShift Virtualization - Manage Container & VMs workload togather.
+
+1-RH OpenShift Virtualization use KVM & libvirt.
+- Use KVM (Kernel based Virtual Machine) as hypervisor [Hypervisor is allow to create VMs]
+- And also it use libvirt [libvirt used for defining the VMs]
+
+
+2-QEMU (Quick EMUlater) - guest agent.
+- QEMU is a software is used to emulate hardwre for your VMs.
+- QEMU is a guest agent, which run inside the VMs, to pass all information (IP address, Mac, Hostname and other status) back to OpenShift host (Hypervisor).
+  Red Hat OpenShift Virtualization Engine
+  
+  
+3-Integration with kubernetes/OpenShift.
+
+End user application.
+Add-On services [RHOKE;RHOCP;RHOPP]
+Certified K8s 
+Container Runtime (crio)
+RHEL core OS 
+h/w;cloud;virt
+
+RHOCPv4.16 - k8sV1.29 
+RHOCPv4.17 - k8sV1.30
+RHOCPv4.18 - k8sV1.31 
+RHOCPv4.19 - k8sV1.32   [Current OCP version]
+
+ Current k8s version - 1.33 (n-1)
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+https://kubernetes.io/docs/setup/production-environment/container-runtimes/
+
+- OpenShift Virtualization is "not a sperate hypervisor product" - it is built on top of kubernetes/OpenShift.
+  FYI- KVM/LibVirt/QEMU are containerized.
+
+Example:- 
+micro service - Red Hat OpenShift
+legacy application which required VMs.
+
+- Deploy VM using "kubeVirt"
+- KVM + LibVirt - spin up the VM inside a conatiner pod.
+- QEMU emulate the h/w for VMs.
+- VMs run on same OpenShift Cluster as conatiner workload.
+  FYI- It  can share storage/networking/security policies etc.
+- oc get vm ; oc start vm ; oc get vmi 
+
+##############################################  
+
+  
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+ 

@@ -1,0 +1,85 @@
+##Point-01##
+- ProductName - Red Hat OpenShift, Red Hat OpenShift Virtulization (Add on Service).
+
+  1-) Cloud services editions 
+     - Red Hat OpenShift Service on AWS        [Platform=AWS;POC=Amazon]  
+     - Microsoft Azure Red Hat OpenShift       [Platform=MS-Azure;POC=MS-Azure]
+     - Red Hat OpenShift Dedicated             [Platform=AWS/GCP;POC=RedHat]
+     - Red Hat OpenShift on IBM Cloud          [Platform=IBM;POC=IBM]
+	 
+  2-) Self-managed editions
+     - Red Hat OpenShift Kubernetes Engine      [Basic-RHOKE]
+	 - Red Hat OpenShift Container Platform     [Standard-RHOCP]
+     - Red Hat OpenShift Platform Plus          [Add-ON-RHOPP]
+     - Red Hat OpenShift Virtualization Engine  [RHOVE]
+
+  3-) Services & add-ons
+     - Red Hat OpenShift AI
+     - Red Hat OpenShift Lightspeed
+     - Red Hat OpenShift Virtualization
+     - Red Hat Quay
+     - Red Hat Advanced Cluster Management for Kubernetes  [RHACM]
+     - Red Hat Advanced Cluster Security for Kubernetes    [RHACS]
+     - Red Hat Advanced Developer Suite
+
+
+##Point-02##
+Classroom Environment (As your Production setup POC).
+- Users details:-
+   - Login to VMs/Servers:-
+      student/student  - sudo access 
+      root/redhat 	  
+   - Login to OCP cluster:-
+	 admin/redhatocp   - cluster-admin access 
+	 developer/developer - member access 
+	 
+	 kubeadmin/kubeadmin-password [w.r.t our LAB- on "utility" node, location=/home/lab/ocp4/auth/{kubeadmin/kubeadmin-password}
+	 
+	 FYI- Login via "admin/developer/kubeadmin" belongs to token based authentication via Oauth.
+     Note: 
+	  - Oauth is an identity Broker and it's in-build service w.r.t Red Hat OpenShift.
+   	  - Oauth provide authorization via RBAC, once authentication done via any IdP (Identity Provider)
+	  
+	  kubeconfig file can be used for authentication (Client Certificate)
+	  
+	  
+	  API URL & Web Console:-
+      As per Our LAB:-
+	    clusterName - ocp4 
+		baseDomain  - example.com 
+		
+      API URL    - https://api.clusterName.baseDomain:6443 
+	  As per LAB - https://api.ocp4.example.com:6443 
+	  
+	  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443
+	  oc login --token=aksjdjaksljdlasjlkajdlka https://api.ocp4.example.com:6443
+	  oc login -u admin https://api.ocp4.example.com:6443
+	  
+	  
+	  Web Console:-
+	    appName- console 
+		namespaceName- openshift-console 
+		
+		https://appName-namespaceName.apps.clusterName.baseDomain
+		https://console-openshift-console.apps.ocp4.example.com 
+
+
+- Network/Domain details:-
+   NetworkName              DomainName            IPRange   
+  student network        lab.example.com        172.25.250.0/24 
+  cluster network        ocp4.example.com       192.168.50.0/24 
+  Server network         srv.example.com        192.168.51.0/24 
+  classroom Network      example.com            172.25.252.0/24
+  
+
+- VMs/Servers details:-
+   classroom.example.com           [Allow to connect to internal for quay.io/registry.redhat.io/access.redhat.com 
+   workstation.lab.example.com     [jump server - oc,helm etc)
+   bastion.lab.example.com         [Connect student n/w to classroom network]
+   utility.lab.example.com         [connect student and service network with cluster network]
+                                    Additionally providing - DNS/HAproxy/DHCP/Apache/NFS
+   server.svc.example.com          private DHCP network provider 
+   master01-03.ocp4.example.com    master node/control plan node [k8s/ocp services running] - also worker node.
+   worker01-03.ocp4.example.com    worker node/compute plan node [End user application - VIrtKube]
+   ceph.ocp4.example.com           [ODF cluster - Ceph/Noobaa storage class]
+   registry.ocp4.example.com       [registry/git repo]
