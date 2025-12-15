@@ -1,0 +1,44 @@
+LAB-01:- Custom Lab-01
+- Create RH labs (ROL - RedHat Online Learning - https://rol.redhat.com).
+- Click on "Lunch" and -> "Create/Start" lab.
+- Lab Environment:-
+  Users:- 
+    - Login to VMs/Servers:-
+	  student/student [student account having sudo access]
+	  root/redhat 
+	- Login to OCP cluster:-
+	  admin/redhatocp  [cluster-admin - same as root account w.r.t Linux]
+	  developer/developer [Basic account]
+	  API URL - https://api.ocp4.example.com:6443 
+	  Web URL - https://console-openshift-console.apps.ocp4.example.com  [admin/redhatocp]
+	  
+    - Click on "Open Console" for workstation.
+	- Automatically logged in via student account, now open terminal.
+	- From workstation, using student login to utility node via lab account.
+	  $ hostname -s 
+	  workstation
+	  $ hostname -d 
+	  lab.example.com 
+	  $ hostname -f 
+	  workstation.lab.example.com 
+	  $ whoami 
+	  student 
+	  
+	  $ ssh lab@utility 
+	  $ ls
+	  $ ./wait.sh 
+	  
+	  FYI- Once "./wait.sh" done and provides you an interface (Terminal) - LAB up and running.
+	  
+	$ exit
+	$ hostname -f 
+	workstation.lab.example.com 
+	
+	
+	Now login to OCP cluster.
+	$ oc login -u admin -p redhatocp https://api.ocp4.example.com:6443
+    $ oc get nodes
+    $ oc version 
+    $ oc clusterversion 
+
+	
